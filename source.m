@@ -9,5 +9,14 @@ I = imread('mango-leaf.jpg');
 %figure, imshow(bwimg);
 %figure, imshow(rgbimg);
 
+%convert rgb inage to grey scale
 grayI = rgb2gray(rgbimg);
-imshow(grayI);
+
+%
+grayIAdj = imadjust(grayI,[70/255 153/255]);
+
+%figure,imhist(grayI);
+%figure,imhist(grayIAdj);
+
+figure,imshow(grayI);
+figure,imshow(grayIAdj);
