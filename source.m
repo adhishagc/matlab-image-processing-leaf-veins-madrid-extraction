@@ -21,18 +21,17 @@ ed_neg = imcomplement(ed);
 
 %get dimensions of the image
 [r,c] = size(IGray);
-
+IGrayEdit = IGray;
 for i=1:r
     for j=1:c
         val = imdil_neg(i,j); 
         if val == 0
-            IGray(i,j) = 255;
+            IGrayEdit(i,j) = 255;
         end
     end
 end
 
-imshow(IGray);
-%subplot(1,2,1),
-%imshow(I),
-%%subplot(1,2,2),
-%imshow(imdil_neg)
+subplot(1,2,1),
+imshow(IGray),
+subplot(1,2,2),
+imshow(IGrayEdit)
