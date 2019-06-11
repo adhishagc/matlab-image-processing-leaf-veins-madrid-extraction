@@ -4,7 +4,7 @@ I = imread('mango-leaf.jpg');
 %background removal using HSV colour space thresholding
 %TO DO : Write the code from scratch
 [bwimg, rgbimg] = background_removal(I);
-
+Inew = I - 
 %preview returns
 %figure, imshow(bwimg);
 %figure, imshow(rgbimg);
@@ -21,9 +21,7 @@ grayIAdj = imadjust(grayI,[70/255 153/255]);
 %convert to binary
 %imgBin = im2bw(grayIAdj,55/255)
 %imgEdge = edge(grayI,'sobel',155)
-
-
-%imshow(I);
+imshow(I);
 
 %figure,imshow(grayI);
 %figure,imshow(grayIAdj);
