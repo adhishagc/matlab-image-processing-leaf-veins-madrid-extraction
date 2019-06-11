@@ -5,7 +5,7 @@ I = imread('jack-leaf.jpg');
 IGray = rgb2gray(I);
 
 %Convert to Binary
-IBin = im2bw(IGray,141/255);
+IBin = im2bw(IGray,129/255); %141/255 disk 3 initially
 
 
 
@@ -14,7 +14,7 @@ ed = edge(IBin,'roberts');
 %ed_neg = medfilt2(ed_neg,[3 3]); % doesnt seem to do well
 
 %structuring
-se = strel('disk',3);
+se = strel('disk',1);
 imdil = imdilate(ed,se);
 imdil_neg = imcomplement(imdil);
 ed_neg = imcomplement(ed);
