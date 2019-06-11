@@ -14,7 +14,7 @@ ed = edge(IBin,'roberts');
 %ed_neg = medfilt2(ed_neg,[3 3]); % doesnt seem to do well
 
 %structuring
-se = strel('disk',1);
+se = strel('disk',1); %strel('line',3,45); doesnt count the midrib
 imdil = imdilate(ed,se);
 imdil_neg = imcomplement(imdil);
 ed_neg = imcomplement(ed);
