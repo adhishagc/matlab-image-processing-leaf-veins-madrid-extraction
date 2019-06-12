@@ -4,9 +4,13 @@ I = imread('jack-leaf.jpg');
 
 %Convert to Gray Scale
 IGray = rgb2gray(I);
+IGrayOri = IGray;
+IGray = histeq(IGray);
+IGray = imadjust(IGray,[120/255 130/255]);
 
-%se2 = strel('disk',1); %strel('line',3,45); doesnt count the midrib
-%IGray = imdilate(IGray,se2);
+se2 = strel('disk',1); %strel('line',3,45); doesnt count the midrib
+
+IGray = imdilate(IGray,se2);
 
 
 %Convert to Binary
@@ -43,12 +47,12 @@ for i=1:r
     for j=1:c
         val = imdil_neg(i,j); 
         if val == 0
-            IGrayEdit(i,j) = 0;
+            IGrayOri(i,j) = 255;
         end
     end
 end
 
-imshow(IGrayEdit)
+imshow(IGrayOri)
 
 %subplot(1,2,1),
 %imshow(ed_neg_nf),
