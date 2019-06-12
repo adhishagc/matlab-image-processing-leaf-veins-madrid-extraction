@@ -4,6 +4,9 @@ I = imread('jack-leaf.jpg');
 %Convert to Gray Scale
 IGray = rgb2gray(I);
 
+%se2 = strel('disk',3); %strel('line',3,45); doesnt count the midrib
+%IGray = imdilate(IGray,se);
+
 %Convert to Binary
 IBin = im2bw(IGray,129/255); %141/255 disk 3 initially
 
@@ -26,7 +29,7 @@ for i=1:r
     for j=1:c
         val = imdil_neg(i,j); 
         if val == 0
-            IGrayEdit(i,j) = 255;
+            IGrayEdit(i,j) = 0;
         end
     end
 end
@@ -34,4 +37,4 @@ end
 subplot(1,2,1),
 imshow(IGray),
 subplot(1,2,2),
-imshow(IGrayEdit)
+imshow(imdil_neg)
