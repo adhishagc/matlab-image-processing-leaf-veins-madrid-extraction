@@ -29,12 +29,13 @@ for i=1:r
     for j=1:c
         val = imdil_neg(i,j); 
         if val == 0
-            IGrayEdit(i,j) = 0;
+            IGrayEdit(i,j) = 255;
         end
     end
 end
+imshow(IGrayEdit);
 
-subplot(1,2,1),
-imshow(IGray),
-subplot(1,2,2),
-imshow(imdil_neg)
+%subplot(1,2,1),
+%imshow(IGray),
+%subplot(1,2,2),
+%imshow(IGrayEdit)
