@@ -1,0 +1,16 @@
+clear all;
+%read the leaf image
+I = imread('jack-leaf.jpg');
+
+%Convert to Gray Scale
+IGray = rgb2gray(I);
+
+%Convert to Binary
+IBin = im2bw(IGray,129/255); %141/255 disk 3 initially
+
+%compare IGray and IBinary
+%imshow(imcomplement(IBin)),
+%imtool(IGray);
+
+%random white liquid kind of blobs are there. Therefore adjusting contrast
+IAdj =  imadjust(I,stretchlim(I),[]);
