@@ -4,12 +4,35 @@ I = imread('jack-leaf.jpg');
 
 %Convert to Gray Scale
 IGray = rgb2gray(I);
+IGrayOri = IGray; %backup the variable
 
-%se2 = strel('disk',3); %strel('line',3,45); doesnt count the midrib
-%IGray = imdilate(IGray,se);
+%Image enhancement using histogram equalization
+IGray = histeq(IGray);
+%image instensity adjust
+IGray = imadjust(IGray,[120/255 130/255]);
+%imshow(IGray);
+
+%convert to binary image
+IBin = im2bw(IGray,129/255); %141/255 disk 3 initially
+
+%erode
+se = strel('disk',2); %strel('line',3,45); doesnt count the midrib
+IGray = imerode(IBin,se);
+
+%reduce noise
+IBin_noiseRem = medfilt2(IBin,[3 3]);
+
+
+
+
+%dilate
+%se2 = strel('disk',1); %strel('line',3,45); doesnt count the midrib
+%IGray = imdilate(IBin,se2);
+
+%imshow(IBin);
 
 %Convert to Binary
-IBin = im2bw(IGray,129/255); %141/255 disk 3 initially
+%IBin = im2bw(IGray,129/255); %141/255 disk 3 initially
 
 
 
@@ -19,10 +42,8 @@ ed = edge(IBin,'roberts');
 
 %structuring
 se = strel('disk',1); %strel('line',3,45); doesnt count the midrib
-imdil = imdiate(ed,se);
-imdil = bwareaopen(ed, 500);
-se = strel('disk',1);
 imdil = imdilate(ed,se);
+imdil = bwareaopen(imdil, 900);
 imdil_neg = imcomplement(imdil);
 
 %ed_neg = imcomplement(ed); good outputs
@@ -44,12 +65,14 @@ for i=1:r
     for j=1:c
         val = imdil_neg(i,j); 
         if val == 0
-            IGrayEdit(i,j) = 0;
+            IGrayOri(i,j) = 255;
         end
     end
 end
 
-subplot(1,2,1),
+%imshow(imdil_neg)
+
+%subplot(1,2,1),
 %imshow(ed_neg_nf),
-subplot(1,2,2),
-imshow(imdil_neg)
+%subplot(1,2,2),
+%imshow(imdil_neg)
